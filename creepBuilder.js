@@ -11,10 +11,20 @@ var creepBuilder = {
 	    }
 
 	    if(creep.memory.building){
-            var target = creep.pos.findClosestByRange(FIND_MY_CONSTRUCTION_SITES);
-            if(target) {
-                if(creep.build(target) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target);
+            var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: (structure) => structure.hits < structure.hitsMax
+            });
+            if(closestDamagedStructure) {
+                if (creep.repair(closestDamagedStructure) == ERR_NOT_IN_RANGE){
+                    creep.moveTo(closestDamagedStructure);
+                }
+
+            }else{
+                var target = creep.pos.findClosestByRange(FIND_MY_CONSTRUCTION_SITES);
+                if(target) {
+                    if(creep.build(target) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(target);
+                    }
                 }
             }
         }else{
