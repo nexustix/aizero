@@ -53,12 +53,13 @@ var spawnZero = {
         /*
             WANT amount of creeps
         */
+        //TODO put into memory
         // prime harvester
         var L_ZeroHarvesterCount = 1
         // small harvester
-        var L_TransporterCount = harvesters.length
+        var L_TransporterCount = Math.round(harvesters.length/2); //round(harvesters.length)
         // small upgrader
-        var L_HarvesterCount = sources.length * 2
+        var L_HarvesterCount = sources.length * 3
         // small upgrader
         var L_UpgraderCount = 1
         // small builder
