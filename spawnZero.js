@@ -56,7 +56,7 @@ var spawnZero = {
         // prime harvester
         var L_ZeroHarvesterCount = 1
         // small harvester
-        var L_TransporterCount = 1 //harvesters.length
+        var L_TransporterCount = harvesters.length
         // small upgrader
         var L_HarvesterCount = sources.length * 2
         // small upgrader
