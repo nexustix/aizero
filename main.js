@@ -6,8 +6,20 @@ var spawnZero = require('spawnZero');
 
 module.exports.loop = function () {
 
+
+    for(var name in Memory.creeps) {
+            if(!Game.creeps[name]) {
+                delete Memory.creeps[name];
+            }
+    }
+
+
   for(var name in Game.spawns){
     var spawn = Game.spawns[name];
+
+    if(!Game.spawns[name]) {
+        delete Game.spawns[name];
+    }
 
     if (spawn.memory.role == null){
       spawn.memory.role = 'zerospawn';
@@ -17,7 +29,7 @@ module.exports.loop = function () {
         //roleHarvester.run(creep);
         //spawnZero.run(spawn);
         //Room.createConstructionSite(spawn.pos.x+3, spawn.pos.y+3, STRUCTURE_STORAGE)
-        spawnZero.run(spawn)
+        spawnZero.run(spawn);
         //console.log('the cake is a lie');
     }
   }

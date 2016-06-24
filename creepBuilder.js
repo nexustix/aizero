@@ -10,20 +10,21 @@ var creepBuilder = {
 	        creep.memory.building = true;
 	    }
 
-	    if(creep.memory.building) {
-	        var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
-            if(targets.length) {
-                if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0]);
+	    if(creep.memory.building){
+            var target = creep.pos.findClosestByRange(FIND_MY_CONSTRUCTION_SITES);
+            if(target) {
+                if(creep.build(target) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target);
                 }
             }
-	    }
-	    else {
-	        var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0]);
+        }else{
+            var pickup = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY);
+            if(pickup){
+                if(creep.pickup(pickup) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(pickup);
+                }
             }
-	    }
+        }
 	}
 };
 
