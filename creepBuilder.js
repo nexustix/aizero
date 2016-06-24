@@ -11,7 +11,7 @@ var creepBuilder = {
 	    }
 
 	    if(creep.memory.building){
-            var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
+            var closestDamagedStructure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => structure.hits < structure.hitsMax
             });
             if(closestDamagedStructure) {
