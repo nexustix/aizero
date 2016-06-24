@@ -26,7 +26,13 @@ var creepTransporter = {
             }
 
         }else{
-            var pickup = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY);
+            var pickup = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY, {
+                    filter: (pile) => {
+                        return (
+                            pile.amount >= 10
+                              )
+                    }
+            });
             if(pickup){
                 if(creep.pickup(pickup) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(pickup);
