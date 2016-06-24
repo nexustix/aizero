@@ -1,4 +1,4 @@
-var roleGuard = {
+var creepGuard = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
@@ -16,4 +16,4 @@ var roleGuard = {
     }
 };
 
-module.exports = roleGuard;
+module.exports = creepGuard;

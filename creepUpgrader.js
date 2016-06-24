@@ -1,4 +1,4 @@
-var roleUpgrader = {
+var creepUpgrader = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
@@ -23,4 +23,4 @@ var roleUpgrader = {
   	}
 };
 
-module.exports = roleUpgrader;
+module.exports = creepUpgrader;
