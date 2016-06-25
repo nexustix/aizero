@@ -154,11 +154,20 @@ var spawnZero = {
         for(var name in Game.creeps) {
             var creep = Game.creeps[name];
 
-            if (creep.ticksToLive <= (CREEP_LIFE_TIME / 2)){
-                var target = creep.pos.findClosestByRange(FIND_MY_SPAWNS);
+            //if (creep.ticksToLive <= (CREEP_LIFE_TIME / 2)){
+            if (creep.ticksToLive <= (500) && (spawn.energy >= Math.round(spawn.energyCapacity/6))){
+                /*
+                var target = creep.pos.findClosestByRange(FIND_MY_SPAWNS, {
+                        filter: (tmptarget) => {
+                            //return(tmptarget.energy >= Math.round(tmptarget.energyCapacity/6))
+                            return(true)
+                        }
+                    });
                 if(target){
                     creep.moveTo(target);
                 }
+                */
+                creep.moveTo(spawn);
             }else{
 
                 if(creep.memory.role == 'L_zeroharvester') {
