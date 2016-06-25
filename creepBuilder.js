@@ -12,7 +12,9 @@ var creepBuilder = {
 
 	    if(creep.memory.usingRes){
             var closestDamagedStructure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                filter: (structure) => (structure.hits < structure.hitsMax) && ( (structure.structureType != STRUCTURE_WALL) || (structure.hits <= 100) )
+                filter: (structure) => {
+                    return (structure.hits < structure.hitsMax) && ( (structure.structureType != STRUCTURE_WALL) || (structure.hits <= 100) )
+                }
             });
             if(closestDamagedStructure) {
                 if (creep.repair(closestDamagedStructure) == ERR_NOT_IN_RANGE){

@@ -1,0 +1,10 @@
+zeroharvester -> gets energy from sources and gives it to storage buildings
+
+harvester -> goes to source and keeps hitting it (dropping resource on the floor)
+transporter -> gets resources dropped by harvesters and stores them
+
+builder -> builds structures
+
+upgrader -> upgrades controller
+
+guard -> does nothing until an enemy arrives

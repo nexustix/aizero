@@ -1,3 +1,8 @@
+var utilCreep = require('utilCreep');
+//require('utilCreep');
+
+//import('utilCreep')
+
 var creepTransporter = {
 
     /** @param {Creep} creep **/
@@ -10,6 +15,14 @@ var creepTransporter = {
   	    }
 
         if(creep.memory.transporting){
+            var dropoff = utilCreep.findEnergyDropoff(creep)
+            //var dropoff = null
+            if (dropoff){
+                if(creep.transfer(dropoff, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(dropoff);
+                }
+            }
+            /*
             var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: (structure) => {
                         return (
@@ -25,8 +38,18 @@ var creepTransporter = {
             if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target);
             }
-
+            */
         }else{
+            var pickup = utilCreep.findEnergyPileInRoom(creep)
+            //var pickup = null
+            if (pickup){
+                if(creep.pickup(pickup) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(pickup);
+                }
+            }else{
+                creep.say("huh")
+            }
+            /*
             var pickup = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY, {
                     filter: (pile) => {
                         return (
@@ -38,7 +61,11 @@ var creepTransporter = {
                 if(creep.pickup(pickup) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(pickup);
                 }
-            }/*else{
+            }
+            */
+
+            /*
+            else{
                 if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(creep.room.controller);
                 }

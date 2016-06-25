@@ -59,7 +59,7 @@ var spawnZero = {
         // small harvester
         var L_TransporterCount = Math.round(harvesters.length/2); //round(harvesters.length)
         // small upgrader
-        var L_HarvesterCount = sources.length * 3
+        var L_HarvesterCount = sources.length //* 3
         // small upgrader
         var L_UpgraderCount = 1
         // small builder
@@ -155,7 +155,7 @@ var spawnZero = {
             var creep = Game.creeps[name];
 
             //if (creep.ticksToLive <= (CREEP_LIFE_TIME / 2)){
-            if (creep.ticksToLive <= (500) && (spawn.energy >= Math.round(spawn.energyCapacity/6))){
+            if (creep.ticksToLive <= (CREEP_LIFE_TIME / 2) && (spawn.energy >= Math.round(spawn.energyCapacity/6))){
                 /*
                 var target = creep.pos.findClosestByRange(FIND_MY_SPAWNS, {
                         filter: (tmptarget) => {

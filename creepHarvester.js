@@ -16,6 +16,9 @@ var creepHarvester = {
             }
         }
         else {
+            for(var resourceType in creep.carry) {
+                creep.drop(resourceType);
+            }
             /*
             var dropzones = creep.room.find(FIND_DROPPED_ENERGY);
             var dropzone = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY);
@@ -27,12 +30,14 @@ var creepHarvester = {
                 }
             }else{
             */
+            /*
                 creep.moveTo(creep.room.controller);
                 if( creep.pos.getRangeTo(creep.room.controller) <= 2){
                     for(var resourceType in creep.carry) {
                         creep.drop(resourceType);
                     }
                 }
+            */
             //}
             /*
             creep.moveTo(creep.room.controller);
