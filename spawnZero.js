@@ -181,40 +181,7 @@ var spawnZero = {
                 }
             }
         }
-        /*
-        if (spawn.memory.doRoads){
-            //var sources = spawn.room.find(FIND_SOURCES);
 
-            var path = (spawn.pos.findPathTo(spawn.room.controller))
-            for (i = 0; i < path.length; i++) {
-                //text += path[i] + "<br>";
-                //console.log('X:'+ path[i].x + "Y:" + path[i].y);
-                //spawn.room.createConstructionSite(path[i].x, path[i].y, STRUCTURE_ROAD)
-            }
-
-            for (s = 0; s < sources.length; s++) {
-                //path = (spawn.room.controller.pos.findPathTo(source.pos.x, source.pos.y))
-                var path = (spawn.room.controller.pos.findPathTo(sources[s]))
-                for (i = 0; i < path.length; i++) {
-                    //text += path[i] + "<br>";
-                    console.log('X:'+ path[i].x + "Y:" + path[i].y);
-                    //spawn.room.createConstructionSite(path[i].x, path[i].y, STRUCTURE_ROAD)
-                }
-            }
-            /*
-            for( var tile in path){
-                console.log('X:'+ tile['x'] + "Y:" + tile['y']);
-                //spawn.room.createConstructionSite(tile.x, tile.y, STRUCTURE_ROAD)
-            }
-            */
-        /*
-            spawn.memory.doRoads = false
-        }else{
-            spawn.memory.doRoads = false
-        }
-        */
-
-        //if (spawn.memory.doRoads != null ){
         if(spawn.memory.doRoads == null){
             spawn.memory.doRoads = true;
         }
@@ -266,6 +233,23 @@ var spawnZero = {
             k_creeps++;
         }
         */
+        var containers = spawn.room.find(FIND_STRUCTURES, {
+                filter: (structure) => {
+                    return (
+                            structure.structureType == STRUCTURE_CONTAINER
+                          );
+                }
+        });
+        for (i = 0; i < containers.length; i++) {
+            var receiver = containers[i].pos.findClosestByRange(FIND_MY_CREEPS, {
+                    filter: (tmpcreep) => {
+                        return(!tmpcreep.memory.usingRes)
+                    }
+                });
+            if(receiver){
+                containers[i].transfer(receiver, [RESOURCE_ENERGY])
+            }
+        }
 
 
 	}

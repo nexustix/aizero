@@ -3,14 +3,14 @@ var creepBuilder = {
     /** @param {Creep} creep **/
     run: function(creep) {
 
-	    if(creep.memory.building && creep.carry.energy == 0) {
-            creep.memory.building = false;
+	    if(creep.memory.usingRes && creep.carry.energy == 0) {
+            creep.memory.usingRes = false;
 	    }
-	    if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
-	        creep.memory.building = true;
+	    if(!creep.memory.usingRes && creep.carry.energy == creep.carryCapacity) {
+	        creep.memory.usingRes = true;
 	    }
 
-	    if(creep.memory.building){
+	    if(creep.memory.usingRes){
             var closestDamagedStructure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: (structure) => structure.hits < structure.hitsMax
             });
@@ -33,13 +33,14 @@ var creepBuilder = {
                         return (
                                 structure.structureType == STRUCTURE_STORAGE ||
                                 structure.structureType == STRUCTURE_CONTAINER
-                            )&& structure.energy > 0;
+                            )&& structure.store[RESOURCE_ENERGY] > 0;
                     }
             });
             if(target){
-                if(creep.pickup(target) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target);
-                }
+                creep.moveTo(target);
+                //if(creep.pickup(target) == ERR_NOT_IN_RANGE) {
+                    //creep.moveTo(target);
+                //}
             }else{
                 var pickup = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY, {
                         filter: (pile) => {

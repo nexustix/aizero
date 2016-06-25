@@ -2,14 +2,14 @@ var creepUpgrader = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        if(creep.memory.upgrading && creep.carry.energy == 0) {
-              creep.memory.upgrading = false;
+        if(creep.memory.usingRes && creep.carry.energy == 0) {
+              creep.memory.usingRes = false;
   	    }
-  	    if(!creep.memory.upgrading && creep.carry.energy == creep.carryCapacity) {
-  	        creep.memory.upgrading = true;
+  	    if(!creep.memory.usingRes && creep.carry.energy == creep.carryCapacity) {
+  	        creep.memory.usingRes = true;
   	    }
 
-  	    if(creep.memory.upgrading) {
+  	    if(creep.memory.usingRes) {
           if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
               creep.moveTo(creep.room.controller);
           }
@@ -20,13 +20,14 @@ var creepUpgrader = {
                         return (
                                 structure.structureType == STRUCTURE_STORAGE ||
                                 structure.structureType == STRUCTURE_CONTAINER
-                            )&& structure.energy > 0;
+                            )&& structure.store[RESOURCE_ENERGY] > 0;
                     }
             });
             if(target){
-                if(creep.pickup(target) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target);
-                }
+                creep.moveTo(target);
+                //if(creep.pickup(target) == ERR_NOT_IN_RANGE) {
+                    //creep.moveTo(target);
+                //}
             }else{
                 var sources = creep.room.find(FIND_DROPPED_ENERGY);
                 if(creep.pickup(sources[0]) == ERR_NOT_IN_RANGE) {
