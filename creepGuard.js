@@ -13,7 +13,11 @@ var creepGuard = {
           creep.moveTo(enemies[0]);
         }
     }else{
-        creep.moveTo(25, 25)
+        if(creep.pos.getRangeTo(25,25) >= 5){
+
+        }else{
+            creep.moveTo(25, 25)
+        }
     }
     }
 };
