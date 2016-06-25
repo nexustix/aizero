@@ -192,7 +192,7 @@ var spawnZero = {
         }
 
         if(spawn.memory.doRoads == null){
-            spawn.memory.doRoads = true;
+            spawn.memory.doRoads = false;
         }
         if(spawn.memory.doRoads){
             var i = 0;
