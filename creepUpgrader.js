@@ -15,10 +15,25 @@ var creepUpgrader = {
           }
   	    }
         else {
-            var sources = creep.room.find(FIND_DROPPED_ENERGY);
-            if(creep.pickup(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0]);
+            var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: (structure) => {
+                        return (
+                                structure.structureType == STRUCTURE_STORAGE ||
+                                structure.structureType == STRUCTURE_CONTAINER
+                            )&& structure.energy > 0;
+                    }
+            });
+            if(target){
+                if(creep.pickup(target) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target);
+                }
+            }else{
+                var sources = creep.room.find(FIND_DROPPED_ENERGY);
+                if(creep.pickup(sources[0]) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(sources[0]);
+                }
             }
+
         }
         /*
         else {

@@ -28,18 +28,33 @@ var creepBuilder = {
                 }
             }
         }else{
-            var pickup = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY, {
-                    filter: (pile) => {
+            var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: (structure) => {
                         return (
-                            pile.amount >= 10
-                              )
+                                structure.structureType == STRUCTURE_STORAGE ||
+                                structure.structureType == STRUCTURE_CONTAINER
+                            )&& structure.energy > 0;
                     }
             });
-            if(pickup){
-                if(creep.pickup(pickup) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(pickup);
+            if(target){
+                if(creep.pickup(target) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target);
+                }
+            }else{
+                var pickup = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY, {
+                        filter: (pile) => {
+                            return (
+                                pile.amount >= 10
+                                  )
+                        }
+                });
+                if(pickup){
+                    if(creep.pickup(pickup) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(pickup);
+                    }
                 }
             }
+
             /*
             var pickup = creep.pos.findClosestByRange(FIND_DROPPED_ENERGY);
             if(pickup){
