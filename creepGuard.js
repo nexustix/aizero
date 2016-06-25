@@ -14,10 +14,10 @@ var creepGuard = {
         }
     }else{
         if(creep.pos.getRangeTo(25,25) >= 5){
-
-        }else{
             creep.moveTo(25, 25)
-        }
+        }//else{
+
+        //}
     }
     }
 };
