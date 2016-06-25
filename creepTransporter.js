@@ -7,14 +7,14 @@ var creepTransporter = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        if(creep.memory.transporting && creep.carry.energy == 0) {
-              creep.memory.transporting = false;
+        if(creep.memory.usingRes && creep.carry.energy == 0) {
+              creep.memory.usingRes = false;
   	    }
-  	    if(!creep.memory.transporting && creep.carry.energy == creep.carryCapacity) {
-  	        creep.memory.transporting = true;
+  	    if(!creep.memory.usingRes && creep.carry.energy == creep.carryCapacity) {
+  	        creep.memory.usingRes = true;
   	    }
 
-        if(creep.memory.transporting){
+        if(creep.memory.usingRes){
             var dropoff = null;
 
             dropoff = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
@@ -30,12 +30,12 @@ var creepTransporter = {
                     creep.moveTo(dropoff);
                 }
             }else{
-                dropoff = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
+                dropoff = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                         filter: (structure) => {
                             return (
                                     structure.structureType == STRUCTURE_STORAGE ||
                                     structure.structureType == STRUCTURE_CONTAINER
-                                  )&& structure.energy < structure.energyCapacity;
+                                )&& structure.store[RESOURCE_ENERGY] < structure.storeCapacity;
                         }
                 });
 
@@ -44,7 +44,7 @@ var creepTransporter = {
                         creep.moveTo(dropoff);
                     }
                 }else{
-                    creep.say("hmm")
+                    //creep.say("hmm")
                 }
             }
 

@@ -252,7 +252,7 @@ var spawnZero = {
         for (i = 0; i < containers.length; i++) {
             var receiver = containers[i].pos.findClosestByRange(FIND_MY_CREEPS, {
                     filter: (tmpcreep) => {
-                        return(!tmpcreep.memory.usingRes)
+                        return( (!tmpcreep.memory.usingRes) && (!tmpcreep.memory.role.endsWith('transporter')) )
                     }
                 });
             if(receiver){
