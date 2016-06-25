@@ -12,7 +12,9 @@ var creepGuard = {
         }else{
           creep.moveTo(enemies[0]);
         }
-      }
+    }else{
+        creep.moveTo(25, 25)
+    }
     }
 };
 
