@@ -2,10 +2,12 @@ var utilCreep = {
 
     // find place to store energy
     /** @param {Creep} creep **/
+    /*
     findEnergyDropoff: function(creep){
     //findEnergyDropoff(creep){
+        var target = null;
 
-        var target = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
+        target = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
                 filter: (structure) => {
                     return (
                             structure.structureType == STRUCTURE_EXTENSION ||
@@ -16,8 +18,7 @@ var utilCreep = {
         if(target){
             return target;
         }
-
-        var target = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
+        target = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
                 filter: (structure) => {
                     return (
                             structure.structureType == STRUCTURE_STORAGE ||
@@ -25,12 +26,14 @@ var utilCreep = {
                           )&& structure.energy < structure.energyCapacity;
                 }
         });
-        if(target){
-            return target;
-        }else{
-            return null;
-        }
+        //if(target){
+        return Game.structures[target];
+        //var spawn = Game.
+        //}else{
+            //return null;
+        //}
     },
+    */
 
     // find most "efficient" energy pile to pickup
     /** @param {Creep} creep **/

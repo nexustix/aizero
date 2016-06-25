@@ -15,12 +15,48 @@ var creepTransporter = {
   	    }
 
         if(creep.memory.transporting){
+            var dropoff = null;
+
+            dropoff = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
+                    filter: (structure) => {
+                        return (
+                                structure.structureType == STRUCTURE_EXTENSION ||
+                                structure.structureType == STRUCTURE_SPAWN
+                              )&& structure.energy < structure.energyCapacity;
+                    }
+            });
+            if (dropoff){
+                if(creep.transfer(dropoff, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(dropoff);
+                }
+            }else{
+                dropoff = creep.pos.findClosestByRange(FIND_MY_STRUCTURES, {
+                        filter: (structure) => {
+                            return (
+                                    structure.structureType == STRUCTURE_STORAGE ||
+                                    structure.structureType == STRUCTURE_CONTAINER
+                                  )&& structure.energy < structure.energyCapacity;
+                        }
+                });
+
+                if (dropoff){
+                    if(creep.transfer(dropoff, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(dropoff);
+                    }
+                }else{
+                    creep.say("hmm")
+                }
+            }
+
+            /*
             var dropoff = utilCreep.findEnergyDropoff(creep)
             //var dropoff = null
             if (dropoff){
                 if(creep.transfer(dropoff, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(dropoff);
                 }
+            }else{
+                creep.say("hmm")
             }
             /*
             var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
